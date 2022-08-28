@@ -1,9 +1,13 @@
+#!/usr/bin/env zsh
 #
 # Executes commands at login post-zshrc.
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
+
+# export _CONTROL="${_CONTROL}:.zlogin"
+# echo $_CONTROL
 
 # Execute code that does not affect the current session in the background.
 {

@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 #
 # Executes commands at the start of an interactive session.
 #
@@ -5,9 +6,24 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-# Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
+# export _CONTROL="${_CONTROL}:.zshrc"
+# echo $_CONTROL
 
-# Customize to your needs...
+#
+# NVM
+#
+
+export NVM_LAZY_LOAD=true
+
+# There is better completion included already
+# export NVM_COMPLETION=true
+
+export NVM_AUTO_USE=true
+
+export NVM_AUTO_USE_ON_LOAD=true
+
+#
+# Prezto
+#
+
+source ~/.zprezto/init.zsh

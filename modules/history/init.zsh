@@ -10,7 +10,7 @@
 # Options
 #
 
-setopt BANG_HIST                 # Treat the '!' character specially during expansion.
+# setopt BANG_HIST                 # Treat the '!' character specially during expansion.
 setopt EXTENDED_HISTORY          # Write the history file in the ':start:elapsed;command' format.
 setopt SHARE_HISTORY             # Share history between all sessions.
 setopt HIST_EXPIRE_DUPS_FIRST    # Expire a duplicate event first when trimming history.
@@ -32,7 +32,17 @@ zstyle -s ':prezto:module:history' savehist '_pmh_savehist' || _pmh_savehist=${_
 HISTFILE="${_pmh_histfile}"  # The path to the history file.
 HISTSIZE="${_pmh_histsize}"  # The maximum number of events to save in the internal history.
 SAVEHIST="${_pmh_savehist}"  # The maximum number of events to save in the history file.
-unset _pmh_{hist{file,size},savehist}
+
+zstyle -s ':prezto:module:history' bang_hist '_pmh_bang_hist' && case "$_pmh_bang_hist" in
+  'yes')
+    setopt BANG_HIST
+    ;;
+  'no')
+    unsetopt BANG_HIST
+    ;;
+esac
+
+unset _pmh_{hist{file,size},savehist,bang_hist}
 
 #
 # Aliases

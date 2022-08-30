@@ -6,6 +6,14 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+#
+# Brew workaround for M1
+#
+
+if [[ $(arch) == 'arm64' ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
 # export _CONTROL="${_CONTROL}:.zshrc"
 # echo $_CONTROL
 

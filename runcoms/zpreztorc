@@ -41,7 +41,7 @@ zstyle ':prezto:load' pmodule \
   'completion' \
   'fzf' \
   'git' \
-  'zsh-nvm' \
+  'nvm' \
   'syntax-highlighting' \
   'history-substring-search' \
   'prompt'

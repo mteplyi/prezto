@@ -10,7 +10,7 @@
 # Brew workaround for M1
 #
 
-if [[ $(arch) == 'arm64' ]]; then
+if [[ $(uname -m) == 'arm64' ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 

@@ -18,7 +18,7 @@ fi
 # echo $_CONTROL
 
 #
-# NVM
+# nvm
 #
 
 export NVM_LAZY_LOAD=true
@@ -35,3 +35,42 @@ export NVM_AUTO_USE_ON_LOAD=true
 #
 
 source ~/.zprezto/init.zsh
+
+#
+# pnpm
+#
+
+export PNPM_HOME="/home/rgp/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+
+#
+# Built-in time util format
+#
+
+if [[ `uname` == Darwin ]]; then
+  MEMORY_UNITS=KB
+else
+  MEMORY_UNITS=MB
+fi
+
+TIMEFMT=$'\n'\
+'%J'$'\n'\
+'%U  user %S system %P cpu %*E total  %M '$MEMORY_UNITS
+
+#
+# SSH agent by gnome-keyring-daemon
+#
+export SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
+
+#
+# The Fuck
+#
+
+# eval $(thefuck --alias)
+
+#
+# end
+#

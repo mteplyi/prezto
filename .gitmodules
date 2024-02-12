@@ -31,7 +31,7 @@
 	shallow = true
 [submodule "modules/nvm"]
 	path = modules/nvm
-	url = https://github.com/mteplyi/zsh-nvm.git
+	url = git@github.com:mteplyi/zsh-nvm.git
 [submodule "modules/fzf"]
 	path = modules/fzf
-	url = https://github.com/mteplyi/fzf-prezto.git
+	url = git@github.com:mteplyi/fzf-prezto.git

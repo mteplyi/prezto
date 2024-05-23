@@ -9,7 +9,7 @@
 # export _CONTROL="${_CONTROL}:.zshenv"
 # echo $_CONTROL
 
-source ~/.env_common
+[[ -f ~/.env_common ]] && source ~/.env_common
 
 #
 # Paths

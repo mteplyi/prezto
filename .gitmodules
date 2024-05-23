@@ -29,9 +29,10 @@
 	path = modules/prompt/external/powerlevel10k
 	url = https://github.com/romkatv/powerlevel10k.git
 	shallow = true
+
 [submodule "modules/nvm"]
 	path = modules/nvm
-	url = git@github.com:mteplyi/zsh-nvm.git
+	url = ../zsh-nvm.git
 [submodule "modules/fzf"]
 	path = modules/fzf
-	url = git@github.com:mteplyi/fzf-prezto.git
+	url = ../fzf-prezto.git

@@ -7,7 +7,7 @@
 #
 
 #
-# Brew workaround for M1
+# Brew workaround for Apple silicon
 #
 
 if [[ $(uname -m) == 'arm64' ]]; then
@@ -40,7 +40,13 @@ source ~/.zprezto/init.zsh
 # pnpm
 #
 
-export PNPM_HOME="/home/rgp/.local/share/pnpm"
+if [[ $(uname -m) == 'arm64' ]]; then
+  export PNPM_HOME="~/Library/pnpm"
+else
+  export PNPM_HOME="~/.local/share/pnpm"
+fi
+
+export PNPM_HOME="/Users/mteplyi/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -63,7 +69,10 @@ TIMEFMT=$'\n'\
 #
 # SSH agent by gnome-keyring-daemon
 #
-export SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
+
+if [[ $(uname -m) != 'arm64' ]]; then
+  export SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
+fi
 
 #
 # The Fuck
@@ -74,3 +83,4 @@ export SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
 #
 # end
 #
+

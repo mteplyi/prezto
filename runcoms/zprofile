@@ -6,5 +6,7 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-# export _CONTROL="${_CONTROL}:.zprofile"
-# echo $_CONTROL
+function () {
+  # export _CONTROL="${_CONTROL}:.zprofile"
+  # echo $_CONTROL
+}

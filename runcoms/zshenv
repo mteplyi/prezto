@@ -6,19 +6,21 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-# export _CONTROL="${_CONTROL}:.zshenv"
-# echo $_CONTROL
+function () {
+  # export _CONTROL="${_CONTROL}:.zshenv"
+  # echo $_CONTROL
 
-[[ -f ~/.env_common ]] && source ~/.env_common
+  [[ -f ~/.env_common ]] && source ~/.env_common
 
-#
-# Paths
-#
+  #
+  # Paths
+  #
 
-# Ensure path arrays do not contain duplicates.
-typeset -gU cdpath fpath mailpath path
+  # Ensure path arrays do not contain duplicates.
+  typeset -gU cdpath fpath mailpath path
 
-# Ensure that a non-login, non-interactive shell has a defined environment.
-if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprofile"
-fi
+  # Ensure that a non-login, non-interactive shell has a defined environment.
+  if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
+    source "${ZDOTDIR:-$HOME}/.zprofile"
+  fi
+}

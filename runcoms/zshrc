@@ -6,81 +6,83 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-#
-# Brew workaround for Apple silicon
-#
+function () {
+  # export _CONTROL="${_CONTROL}:.zshrc"
+  # echo $_CONTROL
 
-if [[ $(uname -m) == 'arm64' ]]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
+  local UNAME_RES=`uname`
+  local UNAME_M_RES=`uname -m`
 
-# export _CONTROL="${_CONTROL}:.zshrc"
-# echo $_CONTROL
+  #
+  # Brew workaround for Apple silicon
+  #
 
-#
-# nvm
-#
+  if [[ $UNAME_M_RES == 'arm64' ]]; then
+    eval `/opt/homebrew/bin/brew shellenv`
+  fi
 
-export NVM_LAZY_LOAD=true
+  #
+  # PNPM
+  #
 
-# There is better completion included already
-# export NVM_COMPLETION=true
+  if [[ $UNAME_M_RES == 'arm64' ]]; then
+    export PNPM_HOME="$HOME/Library/pnpm"
+  else
+    export PNPM_HOME="$HOME/.local/share/pnpm"
+  fi
 
-export NVM_AUTO_USE=true
+  case ":$PATH:" in
+    *":$PNPM_HOME:"*) ;;
+    *) export PATH="$PNPM_HOME:$PATH" ;;
+  esac
 
-export NVM_AUTO_USE_ON_LOAD=true
+  #
+  # Built-in time util format
+  #
 
-#
-# Prezto
-#
+  if [[ $UNAME_RES == Darwin ]]; then
+    local MEMORY_UNITS=KB
+  else
+    local MEMORY_UNITS=MB
+  fi
 
-source ~/.zprezto/init.zsh
+  export TIMEFMT=$'\n%J'$'\n%U  user %S system %P cpu %*E total  %M '$MEMORY_UNITS
 
-#
-# pnpm
-#
+  #
+  # SSH agent by gnome-keyring-daemon
+  #
 
-if [[ $(uname -m) == 'arm64' ]]; then
-  export PNPM_HOME="~/Library/pnpm"
-else
-  export PNPM_HOME="~/.local/share/pnpm"
-fi
+  if [[ $UNAME_M_RES != 'arm64' ]]; then
+    # export SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
+    export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR:-$HOME}/gcr/ssh"
+  fi
 
-export PNPM_HOME="/Users/mteplyi/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
+  #
+  # The Fuck
+  #
 
-#
-# Built-in time util format
-#
+  # eval `thefuck --alias`
 
-if [[ `uname` == Darwin ]]; then
-  MEMORY_UNITS=KB
-else
-  MEMORY_UNITS=MB
-fi
+  #
+  # Prezto nvm module options
+  #
 
-TIMEFMT=$'\n'\
-'%J'$'\n'\
-'%U  user %S system %P cpu %*E total  %M '$MEMORY_UNITS
+  export NVM_LAZY_LOAD=true
 
-#
-# SSH agent by gnome-keyring-daemon
-#
+  # There is better completion included already
+  # export NVM_COMPLETION=true
 
-if [[ $(uname -m) != 'arm64' ]]; then
-  export SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
-fi
+  export NVM_AUTO_USE=true
 
-#
-# The Fuck
-#
+  export NVM_AUTO_USE_ON_LOAD=true
 
-# eval $(thefuck --alias)
+  #
+  # Prezto
+  #
 
-#
-# end
-#
+  source "$HOME/.zprezto/init.zsh"
 
+  #
+  # End
+  #
+}

@@ -44,7 +44,8 @@ zstyle ':prezto:load' pmodule \
   'nvm' \
   'syntax-highlighting' \
   'history-substring-search' \
-  'prompt'
+  'prompt' \
+  'ssh'
 
 #
 # Autosuggestions

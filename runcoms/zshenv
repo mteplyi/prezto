@@ -6,7 +6,7 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-function () {
+() {
   # export _CONTROL="${_CONTROL}:.zshenv"
   # echo $_CONTROL
 

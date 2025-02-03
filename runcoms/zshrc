@@ -13,17 +13,17 @@
   local UNAME_RES=`uname`
   local UNAME_M_RES=`uname -m`
 
-  #
+  ###
   # Brew workaround for Apple silicon
-  #
+  ###
 
   if [[ $UNAME_M_RES == 'arm64' ]]; then
     eval `/opt/homebrew/bin/brew shellenv`
   fi
 
-  #
+  ###
   # PNPM
-  #
+  ###
 
   if [[ $UNAME_M_RES == 'arm64' ]]; then
     export PNPM_HOME="$HOME/Library/pnpm"
@@ -36,9 +36,9 @@
     *) export PATH="$PNPM_HOME:$PATH" ;;
   esac
 
-  #
+  ###
   # Built-in time util format
-  #
+  ###
 
   if [[ $UNAME_RES == Darwin ]]; then
     local MEMORY_UNITS=KB
@@ -48,24 +48,24 @@
 
   export TIMEFMT=$'\n%J'$'\n%U  user %S system %P cpu %*E total  %M '$MEMORY_UNITS
 
-  #
+  ###
   # SSH agent by gnome-keyring-daemon
-  #
+  ###
 
   if [[ $UNAME_M_RES != 'arm64' ]]; then
     # export SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
     export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR:-$HOME}/gcr/ssh"
   fi
 
-  #
+  ###
   # The Fuck
-  #
+  ###
 
   # eval `thefuck --alias`
 
-  #
+  ###
   # Prezto nvm module options
-  #
+  ###
 
   export NVM_LAZY_LOAD=true
 
@@ -76,13 +76,19 @@
 
   export NVM_AUTO_USE_ON_LOAD=true
 
-  #
+  ###
   # Prezto
-  #
+  ###
 
   source "$HOME/.zprezto/init.zsh"
 
-  #
+  ###
+  # Mono
+  ###
+
+  # export MONO_GAC_PREFIX="/opt/homebrew"
+
+  ###
   # End
-  #
+  ###
 }

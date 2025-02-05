@@ -32,7 +32,7 @@
 
 [submodule "modules/nvm"]
 	path = modules/nvm
-	url = ../zsh-nvm.git
+	url = https://github.com/mteplyi/zsh-nvm.git
 [submodule "modules/fzf"]
 	path = modules/fzf
-	url = ../fzf-prezto.git
+	url = https://github.com/mteplyi/fzf-prezto.git

@@ -25,4 +25,3 @@ alias dnfr='sudo dnf remove'       # Removes package(s).
 alias dnfs='dnf search'            # Searches for a package.
 alias dnfu='sudo dnf update'       # Updates packages.
 alias dnfU='sudo dnf upgrade'      # Upgrades packages.
-

@@ -10,37 +10,43 @@
   # export _CONTROL="${_CONTROL}:.zshrc"
   # echo $_CONTROL
 
-  local UNAME_RES=`uname`
-  local UNAME_M_RES=`uname -m`
+  local UNAME_RES=$(uname -s)
+
+  case "$UNAME_RES" in
+    Linux) local IS_LINUX=true ;;
+    Darwin) local IS_MAC=true ;;
+  esac
 
   ###
   # Brew workaround for Apple silicon
   ###
 
-  if [[ $UNAME_M_RES == 'arm64' ]]; then
-    eval `/opt/homebrew/bin/brew shellenv`
+  if [[ $IS_MAC == true ]]; then
+    eval $(/opt/homebrew/bin/brew shellenv)
   fi
 
   ###
   # PNPM
   ###
 
-  if [[ $UNAME_M_RES == 'arm64' ]]; then
-    export PNPM_HOME="$HOME/Library/pnpm"
-  else
-    export PNPM_HOME="$HOME/.local/share/pnpm"
-  fi
+  #
+  # Managed by nvm plugin
+  #
+  # case true in
+  #   $IS_LINUX) export PNPM_HOME="$HOME/.local/share/pnpm" ;;
+  #   $IS_MAC) export PNPM_HOME="$HOME/Library/pnpm" ;;
+  # esac
 
-  case ":$PATH:" in
-    *":$PNPM_HOME:"*) ;;
-    *) export PATH="$PNPM_HOME:$PATH" ;;
-  esac
+  # case ":$PATH:" in
+  #   *":$PNPM_HOME:"*) ;;
+  #   *) export PATH="$PNPM_HOME:$PATH" ;;
+  # esac
 
   ###
   # Built-in time util format
   ###
 
-  if [[ $UNAME_RES == Darwin ]]; then
+  if [[ $IS_MAC == true ]]; then
     local MEMORY_UNITS=KB
   else
     local MEMORY_UNITS=MB
@@ -52,9 +58,9 @@
   # SSH agent by gnome-keyring-daemon
   ###
 
-  if [[ $UNAME_M_RES != 'arm64' ]]; then
+  if [[ $IS_LINUX == true ]]; then
     # export SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
-    export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR:-$HOME}/gcr/ssh"
+    export SSH_AUTH_SOCK="$HOME/gcr/ssh"
   fi
 
   ###
@@ -69,7 +75,9 @@
 
   export NVM_LAZY_LOAD=true
 
+  #
   # There is better completion included already
+  #
   # export NVM_COMPLETION=true
 
   export NVM_AUTO_USE=true
@@ -77,16 +85,16 @@
   export NVM_AUTO_USE_ON_LOAD=true
 
   ###
-  # Prezto
-  ###
-
-  source "$HOME/.zprezto/init.zsh"
-
-  ###
   # Mono
   ###
 
   # export MONO_GAC_PREFIX="/opt/homebrew"
+
+  ###
+  # Prezto
+  ###
+
+  source "$HOME/.zprezto/init.zsh"
 
   ###
   # End

@@ -271,5 +271,11 @@ zstyle ':prezto:module:utility' safe-ops 'no'
 # Set height of the fzf results - default: full height
 zstyle ':prezto:module:fzf' height '40%'
 
+# Set minimum height when --height is given as a percentage - default: 10+
+zstyle ':prezto:module:fzf' min-height '1+'
+
 # Add border around fzf results - default: no
 zstyle ':prezto:module:fzf' border 'yes'
+
+# Set colors defined by user
+# zstyle ':prezto:module:fzf' color-scheme 'dark'

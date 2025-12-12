@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/bin/zsh
 #
 # Defines environment variables.
 #
@@ -6,11 +6,13 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-() {
+_zshenv() {
   # export _CONTROL="${_CONTROL}:.zshenv"
   # echo $_CONTROL
 
-  [[ -f ~/.env_common ]] && source ~/.env_common
+  if [[ -f "$HOME/.env_common" ]]; then
+    source "$HOME/.env_common"
+  fi
 
   #
   # Paths
@@ -20,7 +22,13 @@
   typeset -gU cdpath fpath mailpath path
 
   # Ensure that a non-login, non-interactive shell has a defined environment.
-  if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
+  if [[ ("$SHLVL" -eq 1 && ! -o LOGIN) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
     source "${ZDOTDIR:-$HOME}/.zprofile"
   fi
+
+  if [[ -d "$HOME/.local/bin" ]]; then
+    export PATH="$HOME/.local/bin:$PATH"
+  fi
 }
+_zshenv
+unset -f _zshenv

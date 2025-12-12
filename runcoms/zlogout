@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/bin/zsh
 #
 # Executes commands at logout.
 #
@@ -6,13 +6,13 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-() {
+_zlogin() {
   # Execute code only if STDERR is bound to a TTY.
   [[ -o INTERACTIVE && -t 2 ]] && {
 
     SAYINGS=(
-        "So long and thanks for all the fish.\n  -- Douglas Adams"
-        "Good morning! And in case I don't see ya, good afternoon, good evening and goodnight.\n  --Truman Burbank"
+      "So long and thanks for all the fish.\n  -- Douglas Adams"
+      "Good morning! And in case I don't see ya, good afternoon, good evening and goodnight.\n  --Truman Burbank"
     )
 
     # Print a randomly-chosen message:
@@ -20,3 +20,5 @@
 
   } >&2
 }
+_zlogin
+unset -f _zlogin

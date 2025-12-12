@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/bin/zsh
 #
 # Executes commands at the start of an interactive session.
 #
@@ -6,23 +6,23 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-() {
+_zshrc() {
   # export _CONTROL="${_CONTROL}:.zshrc"
   # echo $_CONTROL
 
-  local UNAME_RES=$(uname -s)
+  local UNAME_RES="$(uname -s)"
 
   case "$UNAME_RES" in
-    Linux) local IS_LINUX=true ;;
-    Darwin) local IS_MAC=true ;;
+  Linux) local IS_LINUX="true" ;;
+  Darwin) local IS_MAC="true" ;;
   esac
 
   ###
   # Brew workaround for Apple silicon
   ###
 
-  if [[ $IS_MAC == true ]]; then
-    eval $(/opt/homebrew/bin/brew shellenv)
+  if [[ "$IS_MAC" == true ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
   fi
 
   ###
@@ -46,10 +46,10 @@
   # Built-in time util format
   ###
 
-  if [[ $IS_MAC == true ]]; then
-    local MEMORY_UNITS=KB
+  if [[ "$IS_MAC" == true ]]; then
+    local MEMORY_UNITS="KB"
   else
-    local MEMORY_UNITS=MB
+    local MEMORY_UNITS="MB"
   fi
 
   export TIMEFMT=$'\n%J'$'\n%U  user %S system %P cpu %*E total  %M '$MEMORY_UNITS
@@ -58,10 +58,10 @@
   # SSH agent by gnome-keyring-daemon
   ###
 
-  if [[ $IS_LINUX == true ]]; then
-    # export SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
-    export SSH_AUTH_SOCK="$HOME/gcr/ssh"
-  fi
+  # if [[ $IS_LINUX == true ]]; then
+  #   export SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
+  #   export SSH_AUTH_SOCK="$HOME/gcr/ssh"
+  # fi
 
   ###
   # The Fuck
@@ -91,12 +91,36 @@
   # export MONO_GAC_PREFIX="/opt/homebrew"
 
   ###
+  # Custom aliases
+  ###
+
+  alias lspath='echo "$PATH" | tr ":" "\n"'
+
+  ucode() {
+    printf '0x%X\n' "'$1"
+  }
+
+  ###
   # Prezto
   ###
 
   source "$HOME/.zprezto/init.zsh"
 
   ###
+  # Completion
+  ###
+
+  compdef pnpm='npm'
+
+  ###
+  # Python related stuff
+  ###
+
+  export CLOUDSDK_PYTHON_SITEPACKAGES=1
+
+  ###
   # End
   ###
 }
+_zshrc
+unset -f _zshrc

@@ -1,9 +1,11 @@
-#!/usr/bin/env zsh
+#!/bin/zsh
 #
 # Sets Prezto options.
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+# shellcheck disable=SC1071
 #
 
 #
@@ -38,14 +40,14 @@ zstyle ':prezto:load' pmodule \
   'directory' \
   'spectrum' \
   'utility' \
-  'completion' \
   'fzf' \
   'git' \
   'nvm' \
   'syntax-highlighting' \
   'history-substring-search' \
   'prompt' \
-  'ssh'
+  'ssh' \
+  'completion'
 
 #
 # Autosuggestions

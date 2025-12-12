@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/bin/zsh
 #
 # Executes commands at login post-zshrc.
 #
@@ -6,7 +6,7 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-() {
+_zlogin() {
   # export _CONTROL="${_CONTROL}:.zlogin"
   # echo $_CONTROL
 
@@ -33,3 +33,5 @@
 
   fi >&2
 }
+_zlogin
+unset -f _zlogin

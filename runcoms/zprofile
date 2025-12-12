@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/bin/zsh
 #
 # Executes commands at login pre-zshrc.
 #
@@ -6,7 +6,9 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
-() {
+_zprofile() {
   # export _CONTROL="${_CONTROL}:.zprofile"
   # echo $_CONTROL
 }
+_zprofile
+unset -f _zprofile
